@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>WInFiDEL v%FW_VERSION% - Sasa Karanovic</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/custom.min.css">
+  <link href="css/fontawesome.min.css" rel="stylesheet">
+  <link href="css/brands.min.css" rel="stylesheet">
+  <link href="css/solid.min.css" rel="stylesheet">
+  <link rel="shortcut icon" type="image/jpg" href="favicon.png"/>
+</head>
+<body>
+  <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">WInFiDEL</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="settings.html">Settings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://sasakaranovic.com/projects/diy-camera-slider/" target="_blank">Project Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/SasaKaranovic/DIY-Camera-Slider" target="_blank">Source Code</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="p-5 text-center bg-body-tertiary">
+    <h1 class="text-body-emphasis"><span id="reading-last">...</span>mm</h1>
+    <p class="col-lg-8 mx-auto fs-5 text-muted">
+      Min: <span id="reading-min">...</span>mm -
+      Average: <span id="reading-avg">...</span>mm -
+      Max: <span id="reading-max">...</span>mm
+    </p>
+    <p class="col-lg-8 mx-auto fs-5 text-muted">
+      Based on <span id="reading-count">...</span> measurements.
+    </p>
+    <p class="col-lg-8 mx-auto fs-5 text-muted mb-4">
+      <a href="#" onclick="javascript:reset_stats();">Reset min/max/avg</a>
+    </p>
+
+    <canvas id="myChart" width="600" height="200"></canvas>
+  </div>
+</div>
+
+
+<div class="container">
+
+    <footer class="w-100 py-2 flex-shrink-3 mt-3 dark-bg">
+            <div class="row gy-4 gx-5">
+                <div class="col-lg-6 col-md-6">
+                    <p class="small text-muted">
+                      WInFiDEL v%FW_VERSION% made by <a href="https://SasaKaranovic.com/" target="_blank">Saša Karanović</a><br>
+                      WInFiDEL is based on the original InFiDel sensor made by <a href="https://www.youtube.com/watch?v=RYgdLPe_T0c" target="_blank">Thomas Sanladerer</a>.<br>
+                      Released as open-source and open-hardware for you to hack and enjoy! :)<br>
+                  </p>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                      <a class="m-2" href="https://sasakaranovic.com/" target="_blank"><i class="fas fa-home"></i> Blog</a>
+                      <a class="m-2" href="https://youtube.com/c/sasakaranovic" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                      <a class="m-2" href="https://twitter.com/_sasakaranovic_" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+                      <a class="m-2" href="https://github.com/sasakaranovic" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                      <a href="https://github.com/sponsors/SasaKaranovic" target="_blank" title="Sponsor on GitHub"><i class="fab fa-github"></i> Sponsor on GitHub</a>
+                </div>
+            </div>
+    </footer>
+</div>
+
+
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src='js/chart.js'></script>
+  <script src="js/winfidel_index.js"></script>
+</body>
+</html>

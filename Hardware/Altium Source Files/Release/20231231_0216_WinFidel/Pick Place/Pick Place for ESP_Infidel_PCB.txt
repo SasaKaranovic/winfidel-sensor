@@ -1,0 +1,56 @@
+Altium Designer Pick and Place Locations
+C:\Users\Sasa\Desktop\git\_shop\ESP-Infidel\Project Outputs for ESP_Infidel\Pick Place\Pick Place for ESP_Infidel_PCB.txt
+
+========================================================================================================================
+File Design Information:
+
+Date:       31-12-23
+Time:       02:15
+Revision:   Not in VersionControl
+Variant:    No variations
+Units used: mil
+
+Designator Comment                            Layer       Footprint                Center-X(mil) Center-Y(mil) Rotation Description                                                                                          
+P2         "Header 5"                         TopLayer    Header_5x1               1681.102mil   720.472mil    180      "Header, 5-Pin"                                                                                      
+R12        Res                                TopLayer    0603                     826.772mil    694.882mil    0        Resistor                                                                                             
+C21        Cap                                TopLayer    0603_-_CAP               1072.835mil   639.764mil    90       Capacitor                                                                                            
+C20        Cap                                TopLayer    0603_-_CAP               826.772mil    635.827mil    0        Capacitor                                                                                            
+U4         MCP3021A5T-E/OT                    TopLayer    SOT95P270X145-5N         964.567mil    639.764mil    270      "10 Bit Analog to Digital Converter 1 Input 1 SAR SOT-23-5"                                          
+U3         DRV5055A2QLPGM                     BottomLayer SS490A                   650.000mil    669.680mil    0        "Hall Effect Sensor Single Axis Radial Lead"                                                         
+U1         "IC REG LINEAR 3.3V 300MA SOT23-5" TopLayer    SOT-23-5                 1606.701mil   482.284mil    90       "600mA null 3.3V positive 6V SOT-25 Linear Voltage Regulators (LDO) ROHS"                            
+R10        Res                                TopLayer    0603                     1133.858mil   639.764mil    270      Resistor                                                                                             
+R9         Res                                TopLayer    0603                     1192.913mil   639.764mil    270      Resistor                                                                                             
+C22        Cap                                TopLayer    0603_-_CAP               515.748mil    653.543mil    90       Capacitor                                                                                            
+C6         Cap                                TopLayer    0805                     1374.016mil   480.315mil    90       Capacitor                                                                                            
+C5         Cap                                TopLayer    0603_-_CAP               1442.913mil   482.284mil    90       Capacitor                                                                                            
+C4         Cap                                TopLayer    0603_-_CAP               1501.968mil   482.284mil    90       Capacitor                                                                                            
+C2         Cap                                TopLayer    0603_-_CAP               1710.630mil   482.284mil    270      Capacitor                                                                                            
+C3         Cap                                TopLayer    0603_-_CAP               1769.685mil   482.284mil    270      Capacitor                                                                                            
+C1         Cap                                TopLayer    0805                     1838.582mil   482.284mil    270      Capacitor                                                                                            
+A1         ANT3216LL00R2400A                  TopLayer    ANT3216LL00R2400A        80.709mil     257.874mil    270      "RF ANT 2.45GHZ CHIP SOLDER SMD"                                                                     
+X1         40MHz                              TopLayer    XTAL-4LEAD-2016          618.110mil    456.693mil    270      "40MHz 9pF ±10ppm SMD2016-4P Crystals ROHS"                                                          
+U2         ESP32-C3-FNH4                      TopLayer    QFN50P500X500X100_HS-33N 661.417mil    248.031mil    0        "Ultra-Low-Power SoC with RISC-V Single-Core CPU 2.4 GHz Wi-Fi (802.11 b/g/n) and Bluetooth® 5 (LE)" 
+SW2        Switch                             TopLayer    Switch-XDTD-0304-215     1035.433mil   334.646mil    90       "50mA Surface Mount SPST 100MO 100,000 Times 12V 160gf@±50gf SMD Tactile Switches ROHS"              
+SW1        Switch                             TopLayer    Switch-XDTD-0304-215     1035.433mil   120.079mil    270      "50mA Surface Mount SPST 100MO 100,000 Times 12V 160gf@±50gf SMD Tactile Switches ROHS"              
+R11        Res                                TopLayer    0201i_0603m              348.849mil    320.128mil    0        Resistor                                                                                             
+R8         Res                                TopLayer    0603                     513.779mil    68.898mil     90       Resistor                                                                                             
+R7         Res                                TopLayer    0603                     572.835mil    68.898mil     90       Resistor                                                                                             
+R6         Res                                TopLayer    0603                     874.016mil    145.669mil    0        Resistor                                                                                             
+R3         Res                                TopLayer    0603                     1155.512mil   521.653mil    180      Resistor                                                                                             
+R2         Res                                TopLayer    0603                     1500.000mil   129.921mil    270      Resistor                                                                                             
+R1         Res                                TopLayer    0603                     1500.000mil   279.528mil    90       Resistor                                                                                             
+C19        Cap                                TopLayer    0603_-_CAP               700.787mil    484.252mil    270      Capacitor                                                                                            
+C18        Cap                                TopLayer    0603_-_CAP               618.110mil    555.118mil    0        Capacitor                                                                                            
+C17        Cap                                TopLayer    0603_-_CAP               446.851mil    440.945mil    270      Capacitor                                                                                            
+C16        Cap                                TopLayer    0603_-_CAP               505.906mil    440.945mil    270      Capacitor                                                                                            
+C15        Cap                                TopLayer    0603_-_CAP               314.961mil    216.536mil    90       Capacitor                                                                                            
+C14        Cap                                TopLayer    0603_-_CAP               374.016mil    216.536mil    90       Capacitor                                                                                            
+C13        Cap                                TopLayer    0603_-_CAP               433.071mil    216.536mil    90       Capacitor                                                                                            
+C12        Cap                                TopLayer    0603_-_CAP               872.047mil    206.693mil    180      Capacitor                                                                                            
+C11        Cap                                TopLayer    0603_-_CAP               633.858mil    68.898mil     90       Capacitor                                                                                            
+C10        Cap                                TopLayer    0603_-_CAP               872.047mil    324.803mil    180      Capacitor                                                                                            
+C9         Cap                                TopLayer    0603_-_CAP               872.047mil    265.748mil    180      Capacitor                                                                                            
+C8         Cap                                TopLayer    0201i_0603m              399.769mil    332.879mil    270      Capacitor                                                                                            
+C7         Cap                                TopLayer    0201i_0603m              299.213mil    332.879mil    270      Capacitor                                                                                            
+R4         Res                                TopLayer    0603                     1155.512mil   462.598mil    180      Resistor                                                                                             
+P1         "USB-C Recepticle"                 TopLayer    GCT_USB4105-GF-A         1744.094mil   195.964mil    0        "3A 1 Surface Mount 16P Female -25?~+85? Type-C SMD USB Connectors ROHS"                             

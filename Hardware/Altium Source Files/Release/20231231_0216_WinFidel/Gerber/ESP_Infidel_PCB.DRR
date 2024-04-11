@@ -1,0 +1,20 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: ESP_Infidel_PCB.PcbDoc   2023-12-31  02:15:29
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : ESP_Infidel_PCB-RoundHoles.TXT
+ASCII SlotHoles File : ESP_Infidel_PCB-SlotHoles.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      0.4mm (16mil)                                             Round             44        PTH        125.24mm (4.93inch)
+T2      0.6mm (24mil)                                             Round             3         PTH        2.54mm (0.10inch)
+T3      0.6mm (24mil)                                             Slot              4         PTH        38.17mm (1.50inch)
+T4      0.9mm (35mil)                                             Round             5         PTH        10.16mm (0.40inch)
+T5      0.65mm (26mil)                                            Round             2         NPTH       5.78mm (0.23inch)
+T6      3.1mm (122mil)                                            Round             2         NPTH       30.65mm (1.21inch)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              60
+
+Total Processing Time (hh:mm:ss) : 00:00:00

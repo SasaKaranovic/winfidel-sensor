@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>WInFiDEL v%FW_VERSION% - Sasa Karanovic</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/custom.min.css">
+  <link href="css/fontawesome.min.css" rel="stylesheet">
+  <link href="css/brands.min.css" rel="stylesheet">
+  <link href="css/solid.min.css" rel="stylesheet">
+  <link rel="shortcut icon" type="image/jpg" href="favicon.png"/>
+</head>
+<body>
+  <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">WInFiDEL</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="settings.html">Settings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://sasakaranovic.com/projects/diy-camera-slider/" target="_blank">Project Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/SasaKaranovic/DIY-Camera-Slider" target="_blank">Source Code</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+<div class="container">
+  <div class="p-5 text-center bg-body-tertiary">
+    <h1 class="text-body-emphasis">Using <span id="calibration-points-count"></span> calibration points</h1>
+
+    <div class="col-lg-6 mx-auto mt-4 mb-5">
+
+        <table id="calibration-points" class="table table-sm table-striped text-left">
+            <thead>
+                <tr class="d-flex">
+                    <th class="col-5">ADC</th>
+                    <th class="col-5">Diameter</th>
+                    <th class="col-2">Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="">
+    <p class="col-lg-8 mx-auto fs-5 text-muted mb-4">
+        We use above calibration points to estimate filament diameter using <a href="https://en.wikipedia.org/wiki/Linear_interpolation" target="_blank" class="text-muted">linear interpolation</a>.<br>
+        First and last point are boundary items and can not be removed.<br>
+        The firmware has been compiled to allow up to %MAX_CALIBRATION_POINTS% calibration points.</p>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="p-5 text-center bg-body-tertiary">
+    <h1 class="text-body-emphasis">Create calibration point</h1>
+
+    <div class="text-left">
+        <p class="col-lg-6 mx-auto fs-5 text-muted mt-4">
+            Calibration procedure (using drill bit)
+        </p>
+        <p class="col-lg-6 mx-auto fs-5 text-muted mb-1">
+            1. Measure drill bit using calipers and note the diameter size in mm
+        </p>
+        <p class="col-lg-6 mx-auto fs-5 text-muted mb-1">
+            2. Insert the drill bit into WInFiDEL sensor and note the ADC value
+        </p>
+        <p class="col-lg-6 mx-auto fs-5 text-muted mb-1">
+            3. In the input box below enter the measured diameter from step #1
+        </p>
+        <p class="col-lg-6 mx-auto fs-5 text-muted mb-1">
+            4. Click on `Calibrate` button and wait for page to reload.
+        </p>
+        <p class="col-lg-6 mx-auto fs-5 text-muted mb-1">
+            5. Verify that the list of calibration points has been updated.
+        </p>
+    </div>
+
+    <div>
+        <p class="col-lg-6 mx-auto fs-5 mt-4">
+            Current ADC value of
+        </p>
+
+        <div class="input-group mb-3 mt-3 col-lg-2 mx-auto">
+          <input type="text" class="form-control" disabled placeholder="" aria-label="" aria-describedby="basic-addon2" id="input-adc-last" data-toggle="tooltip" data-placement="top" title="This value is updated automatically.">
+          <span class="input-group-text" id="adc-label">ADC</span>
+        </div>
+
+
+        <p class="col-lg-6 mx-auto fs-5 mt-4">
+            should be calibrated as
+        </p>
+
+        <div class="input-group mb-3 mt-3 col-lg-2 mx-auto">
+          <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon2" id="input-cal-diameter">
+          <span class="input-group-text" id="basic-addon3">mm</span>
+        </div>
+
+        <div id="invalid-value" class="invalid-feedback">Invalid diameter value!</div>
+
+        <div class="input-group mb-3 mt-3 col-lg-2 mx-auto">
+          <button type="button" class="btn btn-primary" id="btn-calibrate">Calibrate</button>
+        </div>
+
+    </div>
+
+    <div class="">
+        <p class="col-lg-7 mx-auto fs-5 text-muted mt-4">
+            Note: Update existing calibration point by specifying same `mm` diameter.<br>
+            Note: If new point has same ADC or mm value as the existing one. Existing point will be updated.
+        </p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="p-5 text-center bg-body-tertiary">
+    <h1 class="text-body-emphasis">Firmware information</h1>
+
+        <table class="table table-sm table-striped text-left">
+            <thead>
+                <tr class="d-flex">
+                    <th class="col-4 text-break">Parameter</th>
+                    <th class="col-2">Value</th>
+                    <th class="col-6">Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="d-flex">
+                    <td class="col-4 text-break">MAX_CALIBRATION_POINTS</td>
+                    <td class="col-2 text-break">%MAX_CALIBRATION_POINTS%</td>
+                    <td class="col-6">Maximum number of calibration points supported by firmware.</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-4 text-break">CALIBRATION_POINT_SAMPLE_COUNT</td>
+                    <td class="col-2 text-break">%CALIBRATION_POINT_SAMPLE_COUNT%</td>
+                    <td class="col-6">Number of ADC samples taken when creating a calibration point</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-4 text-break">CALIBRATION_POINT_ACCURACY_POINT</td>
+                    <td class="col-2 text-break">%CALIBRATION_POINT_ACCURACY_POINT%</td>
+                    <td class="col-6">When creating calibration point. All ADC samples must be within `%CALIBRATION_POINT_ACCURACY_POINT%` points of each other. Otherwise we will fail to create a calibration point due to ADC noise.</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-4 text-break">ADC_MIN</td>
+                    <td class="col-2 text-break">%ADC_MIN%</td>
+                    <td class="col-6">Minimum value ADC can provide</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-4 text-break">ADC_MIN_EQUALS_MM</td>
+                    <td class="col-2 text-break">%ADC_MIN_EQUALS_MM%</td>
+                    <td class="col-6">Minimum ADC value is treated as `%ADC_MIN_EQUALS_MM%`mm</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-4 text-break">ADC_MAX</td>
+                    <td class="col-2 text-break">%ADC_MAX%</td>
+                    <td class="col-6">Maximum value ADC can provide</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-4 text-break">ADC_MAX_EQUALS_MM</td>
+                    <td class="col-2 text-break">%ADC_MAX_EQUALS_MM%</td>
+                    <td class="col-6">Maximum ADC value is treated as `%ADC_MAX_EQUALS_MM%`mm</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-4 text-break">BUILD_TIME</td>
+                    <td class="col-2 text-break">%BUILD_TIME%</td>
+                    <td class="col-6">Time when firmware was compiled</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-4 text-break">BUILD_DATE</td>
+                    <td class="col-2 text-break">%BUILD_DATE%</td>
+                    <td class="col-6">Date when firmware was compiled</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-4 text-break">ADC_ALGO</td>
+                    <td class="col-2 text-break">%ADC_ALGO%</td>
+                    <td class="col-6">Which alghoritm is used to calculate final ADC value</td>
+                </tr>
+                <tr class="d-flex">
+                    <td class="col-4 text-break">ADC_CHIP</td>
+                    <td class="col-2 text-break">%ADC_CHIP%</td>
+                    <td class="col-6">Which ADC chip is populated on the board</td>
+                </tr>
+            </tbody>
+        </table>
+
+    <div class="">
+        <p class="col-lg-8 mx-auto fs-5 text-muted mb-4">
+            Values in this table are provided for development/debugging purposes (and just for fun).<br>
+            You should not have to worry about them during devices normal operation.
+        </p>
+    </div>
+
+  </div>
+</div>
+
+
+
+<div class="container">
+
+    <footer class="w-100 py-2 flex-shrink-3 mt-5 dark-bg">
+            <div class="row gy-4 gx-5">
+                <div class="col-lg-6 col-md-6">
+                    <p class="small text-muted">
+                      WInFiDEL v%FW_VERSION% made by <a href="https://SasaKaranovic.com/" target="_blank">Saša Karanović</a><br>
+                      WInFiDEL is based on the original InFiDel sensor made by <a href="https://www.youtube.com/watch?v=RYgdLPe_T0c" target="_blank">Thomas Sanladerer</a>.<br>
+                      There are two types of people in the world: those who can extrapolate from incomplete data sets.<br>
+                      Released as open-source and open-hardware for you to hack and enjoy! :)<br>
+                  </p>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                      <a class="m-2" href="https://sasakaranovic.com/" target="_blank"><i class="fas fa-home"></i> Blog</a>
+                      <a class="m-2" href="https://youtube.com/c/sasakaranovic" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                      <a class="m-2" href="https://twitter.com/_sasakaranovic_" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+                      <a class="m-2" href="https://github.com/sasakaranovic" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                      <a href="https://github.com/sponsors/SasaKaranovic" target="_blank" title="Sponsor on GitHub"><i class="fab fa-github"></i> Sponsor on GitHub</a>
+                </div>
+            </div>
+    </footer>
+</div>
+
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/winfidel_calibration.js"></script>
+</body>
+</html>
