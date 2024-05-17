@@ -16,8 +16,6 @@ WInFiDEL is an DIY open-source open-hardware Wireless 3D printing filament diame
 
 This design is heavily inspired by the design previously published by Made with Layers (Thomas Sanladerer) (video: https://www.youtube.com/watch?v=RYgdLPe_T0c)
 
-:soon: (WIP) Soon I will publish a video that goes into more details on how this sensor works and how you can build one.
-This repository will be updated with additional information as soon as that video goes live.
 
 ## Screenshots
 
