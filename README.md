@@ -12,6 +12,8 @@ Sensor
 
 [![WInFiDEL](http://img.youtube.com/vi/FzXX6JxIw_Q/0.jpg)](https://www.youtube.com/watch?v=FzXX6JxIw_Q "WInFiDEL - DIY 3D Printing Filament Diameter Sensor")
 
+[WInFiDEL Video](https://www.youtube.com/watch?v=FzXX6JxIw_Q)
+
 WInFiDEL is an DIY open-source open-hardware Wireless 3D printing filament diameter sensor.
 
 This design is heavily inspired by the design previously published by Made with Layers (Thomas Sanladerer) (video: https://www.youtube.com/watch?v=RYgdLPe_T0c)
