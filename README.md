@@ -19,6 +19,22 @@ WInFiDEL is an DIY open-source open-hardware Wireless 3D printing filament diame
 This design is heavily inspired by the design previously published by Made with Layers (Thomas Sanladerer) (video: https://www.youtube.com/watch?v=RYgdLPe_T0c)
 
 
+## Can I build my own WInFiDEL sensor?
+
+Yes! All the source files (hardware and firmware) are available in this repository.
+
+
+## Can I purchase WInFiDEL PCBA?
+
+Yes! It's available on the [web shop](https://shop.sasakaranovic.com/products/winfidel).
+
+
+## Where can I find documentation?
+
+WInFiDEL documentation can be found on the [official documentation page](https://docs.sasakaranovic.com/winfidel/).
+
+
+
 ## Screenshots
 
 ![Home](assets/WInFiDEL_home.png)
