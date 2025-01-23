@@ -1,11 +1,9 @@
 #include <ESPmDNS.h>
 #include <EEPROM.h>
 #include <WiFiManager.h>
-#include <Arduino_JSON.h>
 #include <ArduinoOTA.h>
 #include "WiFi.h"
 #include "ESPAsyncWebServer.h"
-#include "LittleFS.h"
 #include "include/PersistSettings.h"
 #include "config_winfidel.h"
 
@@ -15,9 +13,19 @@ volatile int WiFi_status = WL_IDLE_STATUS;
 const char mdnsName[] = MDNS_NAME;
 const char wifiName[] = WIFI_HOSTNAME;
 uint8_t dbgOTApercent = 100;
+bool bStatusLED = false;
 
 void setup()
 {
+    pinMode(LED_RED_PIN, OUTPUT);
+    digitalWrite(LED_RED_PIN, HIGH);
+    pinMode(LED_GREEN_PIN, OUTPUT);
+    digitalWrite(LED_GREEN_PIN, HIGH);
+    pinMode(LED_BLUE_PIN, OUTPUT);
+    digitalWrite(LED_BLUE_PIN, HIGH);
+
+    LED_RED_ON();
+
     // Configure Serial communication
 	Serial.begin(115200);
     Serial.println("Wireless Inline Filament Estimator, Low-Cost - WInFiDEL");
@@ -26,6 +34,8 @@ void setup()
     // wifiManager.resetSettings(); // Wipe WiFi settings. Uncomment for WiFi manager testing
 
     delay(500);
+
+    LED_GREEN_ON();
 
     bool res;
     res = wifiManager.autoConnect("SK-WInFiDEL-Setup");
@@ -38,14 +48,6 @@ void setup()
         //if you get here you have connected to the WiFi
         Serial.println("Connected.");
     }
-
-	// Initialize LittleFS
-    Serial.print("Starting LittleFS...");
-    if(!LittleFS.begin()){
-        Serial.println("An Error has occurred while mounting LittleFS");
-        return;
-    }
-    Serial.println("done.");
 
 	Serial.print("WiFi IP: ");
 	Serial.println(WiFi.localIP());
@@ -119,6 +121,7 @@ void setup()
 	Serial.println("Ready to go.");
 
     i2c_scan_bus();
+    LED_RED_OFF();
 }
 
 

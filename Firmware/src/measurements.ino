@@ -104,6 +104,18 @@ void Measurements_Tick(void)
         // Update reading counter
         numMeasurements++;
 
+        // Update the status LED
+        if (bStatusLED)
+        {
+            bStatusLED = false;
+            LED_MEASUREMENT_OFF();
+        }
+        else
+        {
+            bStatusLED = true;
+            LED_MEASUREMENT_ON();
+        }
+
         // Set next update timestamp
         nNextMeasurementTick = millis() + 200;
     }

@@ -81,24 +81,13 @@ void setupWebServer(void)
         request->send(404);
     });
 
-    // send a file when /index is requested
-    server.on("/index.html", HTTP_ANY, [](AsyncWebServerRequest *request){
-        request->send(LittleFS, "/index.html", "text/html", false, template_const_processor);
+    server_init_handlers();
+
+    server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
+    {
+        request->redirect("/index.html");
     });
 
-    server.on("/settings.html", HTTP_ANY, [](AsyncWebServerRequest *request){
-        request->send(LittleFS, "/settings.html", "text/html", false, template_const_processor);
-    });
-
-    server.on("/", HTTP_ANY, [](AsyncWebServerRequest *request) {
-        request->send(LittleFS, "/index.html", "text/html", false, template_const_processor);
-    });
-
-    server.serveStatic("/js/", LittleFS, "/js/");
-    server.serveStatic("/css/", LittleFS, "/css/");
-    server.serveStatic("/webfonts/", LittleFS, "/webfonts/");
-    server.serveStatic("/favicon.png", LittleFS, "/favicon.png");
-    server.serveStatic("/favicon.ico", LittleFS, "/favicon.ico");
 
     server.on("/api/diameter/read", HTTP_GET, [] (AsyncWebServerRequest *request) {
         format_sensor_data();

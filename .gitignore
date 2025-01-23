@@ -80,6 +80,9 @@ Project Outputs for*
 #History
 History
 
+# Ignore data folder
+Firmware/data/
+
 #Exports, but not manual ones
 exports/*
 !exports/manual

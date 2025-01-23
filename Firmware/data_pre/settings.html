@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>WInFiDEL v%FW_VERSION% - Sasa Karanovic</title>
+  <title>WInFiDEL v$FW_VERSION$ - Sasa Karanovic</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/custom.min.css">
@@ -59,7 +59,7 @@
     <p class="col-lg-8 mx-auto fs-5 text-muted mb-4">
         We use above calibration points to estimate filament diameter using <a href="https://en.wikipedia.org/wiki/Linear_interpolation" target="_blank" class="text-muted">linear interpolation</a>.<br>
         First and last point are boundary items and can not be removed.<br>
-        The firmware has been compiled to allow up to %MAX_CALIBRATION_POINTS% calibration points.</p>
+        The firmware has been compiled to allow up to $MAX_CALIBRATION_POINTS$ calibration points.</p>
     </div>
 
   </div>
@@ -143,57 +143,57 @@
             <tbody>
                 <tr class="d-flex">
                     <td class="col-4 text-break">MAX_CALIBRATION_POINTS</td>
-                    <td class="col-2 text-break">%MAX_CALIBRATION_POINTS%</td>
+                    <td class="col-2 text-break">$MAX_CALIBRATION_POINTS$</td>
                     <td class="col-6">Maximum number of calibration points supported by firmware.</td>
                 </tr>
                 <tr class="d-flex">
                     <td class="col-4 text-break">CALIBRATION_POINT_SAMPLE_COUNT</td>
-                    <td class="col-2 text-break">%CALIBRATION_POINT_SAMPLE_COUNT%</td>
+                    <td class="col-2 text-break">$CALIBRATION_POINT_SAMPLE_COUNT$</td>
                     <td class="col-6">Number of ADC samples taken when creating a calibration point</td>
                 </tr>
                 <tr class="d-flex">
                     <td class="col-4 text-break">CALIBRATION_POINT_ACCURACY_POINT</td>
-                    <td class="col-2 text-break">%CALIBRATION_POINT_ACCURACY_POINT%</td>
-                    <td class="col-6">When creating calibration point. All ADC samples must be within `%CALIBRATION_POINT_ACCURACY_POINT%` points of each other. Otherwise we will fail to create a calibration point due to ADC noise.</td>
+                    <td class="col-2 text-break">$CALIBRATION_POINT_ACCURACY_POINT$</td>
+                    <td class="col-6">When creating calibration point. All ADC samples must be within `$CALIBRATION_POINT_ACCURACY_POINT$` points of each other. Otherwise we will fail to create a calibration point due to ADC noise.</td>
                 </tr>
                 <tr class="d-flex">
                     <td class="col-4 text-break">ADC_MIN</td>
-                    <td class="col-2 text-break">%ADC_MIN%</td>
+                    <td class="col-2 text-break">$ADC_MIN$</td>
                     <td class="col-6">Minimum value ADC can provide</td>
                 </tr>
                 <tr class="d-flex">
                     <td class="col-4 text-break">ADC_MIN_EQUALS_MM</td>
-                    <td class="col-2 text-break">%ADC_MIN_EQUALS_MM%</td>
-                    <td class="col-6">Minimum ADC value is treated as `%ADC_MIN_EQUALS_MM%`mm</td>
+                    <td class="col-2 text-break">$ADC_MIN_EQUALS_MM$</td>
+                    <td class="col-6">Minimum ADC value is treated as `$ADC_MIN_EQUALS_MM$`mm</td>
                 </tr>
                 <tr class="d-flex">
                     <td class="col-4 text-break">ADC_MAX</td>
-                    <td class="col-2 text-break">%ADC_MAX%</td>
+                    <td class="col-2 text-break">$ADC_MAX$</td>
                     <td class="col-6">Maximum value ADC can provide</td>
                 </tr>
                 <tr class="d-flex">
                     <td class="col-4 text-break">ADC_MAX_EQUALS_MM</td>
-                    <td class="col-2 text-break">%ADC_MAX_EQUALS_MM%</td>
-                    <td class="col-6">Maximum ADC value is treated as `%ADC_MAX_EQUALS_MM%`mm</td>
+                    <td class="col-2 text-break">$ADC_MAX_EQUALS_MM$</td>
+                    <td class="col-6">Maximum ADC value is treated as `$ADC_MAX_EQUALS_MM$`mm</td>
                 </tr>
                 <tr class="d-flex">
                     <td class="col-4 text-break">BUILD_TIME</td>
-                    <td class="col-2 text-break">%BUILD_TIME%</td>
+                    <td class="col-2 text-break">$BUILD_TIME$</td>
                     <td class="col-6">Time when firmware was compiled</td>
                 </tr>
                 <tr class="d-flex">
                     <td class="col-4 text-break">BUILD_DATE</td>
-                    <td class="col-2 text-break">%BUILD_DATE%</td>
+                    <td class="col-2 text-break">$BUILD_DATE$</td>
                     <td class="col-6">Date when firmware was compiled</td>
                 </tr>
                 <tr class="d-flex">
                     <td class="col-4 text-break">ADC_ALGO</td>
-                    <td class="col-2 text-break">%ADC_ALGO%</td>
+                    <td class="col-2 text-break">$ADC_ALGO$</td>
                     <td class="col-6">Which alghoritm is used to calculate final ADC value</td>
                 </tr>
                 <tr class="d-flex">
                     <td class="col-4 text-break">ADC_CHIP</td>
-                    <td class="col-2 text-break">%ADC_CHIP%</td>
+                    <td class="col-2 text-break">$ADC_CHIP$</td>
                     <td class="col-6">Which ADC chip is populated on the board</td>
                 </tr>
             </tbody>
@@ -217,7 +217,7 @@
             <div class="row gy-4 gx-5">
                 <div class="col-lg-6 col-md-6">
                     <p class="small text-muted">
-                      WInFiDEL v%FW_VERSION% made by <a href="https://SasaKaranovic.com/" target="_blank">Saša Karanović</a><br>
+                      WInFiDEL v$FW_VERSION$ made by <a href="https://SasaKaranovic.com/" target="_blank">Saša Karanović</a><br>
                       WInFiDEL is based on the original InFiDel sensor made by <a href="https://www.youtube.com/watch?v=RYgdLPe_T0c" target="_blank">Thomas Sanladerer</a>.<br>
                       There are two types of people in the world: those who can extrapolate from incomplete data sets.<br>
                       Released as open-source and open-hardware for you to hack and enjoy! :)<br>
