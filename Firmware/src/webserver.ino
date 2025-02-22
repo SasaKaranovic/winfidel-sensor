@@ -89,21 +89,21 @@ void setupWebServer(void)
     });
 
 
-    server.on("/api/diameter/read", HTTP_GET, [] (AsyncWebServerRequest *request) {
+    server.on("/api/v0/diameter/read", HTTP_GET, [] (AsyncWebServerRequest *request) {
         format_sensor_data();
         request->send(200, "application/json", sensor_data);
     });
 
-    server.on("/api/diameter/reset", HTTP_GET, [] (AsyncWebServerRequest *request) {
+    server.on("/api/v0/diameter/reset", HTTP_GET, [] (AsyncWebServerRequest *request) {
         reset_stats();
         request->send(200, "application/json", "{\"status\":\"ok\"}");
     });
 
-    server.on("/api/calibration/read", HTTP_GET, [] (AsyncWebServerRequest *request) {
+    server.on("/api/v0/calibration/read", HTTP_GET, [] (AsyncWebServerRequest *request) {
         request->send(200, "application/json", get_calibration_json());
     });
 
-    server.on("/api/calibration/create", HTTP_GET, [] (AsyncWebServerRequest *request) {
+    server.on("/api/v0/calibration/create", HTTP_GET, [] (AsyncWebServerRequest *request) {
         if ( request->hasParam("mm") )
         {
             winfidel_status_t status;
@@ -146,7 +146,7 @@ void setupWebServer(void)
         }
     });
 
-    server.on("/api/calibration/remove", HTTP_GET, [] (AsyncWebServerRequest *request) {
+    server.on("/api/v0/calibration/remove", HTTP_GET, [] (AsyncWebServerRequest *request) {
         if ( request->hasParam("mm") )
         {
             winfidel_status_t status;
@@ -171,7 +171,7 @@ void setupWebServer(void)
         }
     });
 
-    server.on("/api/calibration/reset", HTTP_GET, [] (AsyncWebServerRequest *request) {
+    server.on("/api/v0/calibration/reset", HTTP_GET, [] (AsyncWebServerRequest *request) {
         if ( request->hasParam("confirm") )
         {
             calibration_reset();
@@ -184,7 +184,7 @@ void setupWebServer(void)
     });
 
 
-    server.on("/api/wifi/reset", HTTP_GET, [] (AsyncWebServerRequest *request) {
+    server.on("/api/v0/wifi/reset", HTTP_GET, [] (AsyncWebServerRequest *request) {
         if ( request->hasParam("confirm") )
         {
             Serial.println("WiFi reset request recevied.");
@@ -197,7 +197,7 @@ void setupWebServer(void)
         }
     });
 
-    server.on("/api/device/reboot", HTTP_GET, [] (AsyncWebServerRequest *request) {
+    server.on("/api/v0/device/reboot", HTTP_GET, [] (AsyncWebServerRequest *request) {
         if ( request->hasParam("confirm") )
         {
             Serial.println("Device reboot request recevied. Rebooting...");

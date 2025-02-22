@@ -48,7 +48,7 @@ $(document).ready(function(){
 
 function get_calibration()
 {
-    $.getJSON( '/api/calibration/read', function( data ) {
+    $.getJSON( '/api/v0/calibration/read', function( data ) {
 
         const total_points = data['data'].length;
         $('#calibration-points-count').text(total_points);
@@ -70,7 +70,7 @@ function get_calibration()
 
 function create_calibration_point(adc, mm)
 {
-    $.get( '/api/calibration/create?adc='+ adc +'&mm='+ mm, function( data ) {
+    $.get( '/api/v0/calibration/create?adc='+ adc +'&mm='+ mm, function( data ) {
         if (data['status'] == 'ok')
         {
             location.reload();
@@ -80,7 +80,7 @@ function create_calibration_point(adc, mm)
 
 function remove_calibration_point(diameter)
 {
-    $.get( '/api/calibration/remove?mm='+ diameter, function( data ) {
+    $.get( '/api/v0/calibration/remove?mm='+ diameter, function( data ) {
         console.log(data);
 
         if (data['status'] == 'ok')
@@ -92,14 +92,14 @@ function remove_calibration_point(diameter)
 
 function refresh_reading()
 {
-    $.getJSON( '/api/diameter/read', function( data ) {
+    $.getJSON( '/api/v0/diameter/read', function( data ) {
         $('#input-adc-last').val(data['data']['adc']);
     });
 }
 
 function reset_stats()
 {
-    $.get( '/api/diameter/reset');
+    $.get( '/api/v0/diameter/reset');
 }
 
 

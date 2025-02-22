@@ -122,6 +122,8 @@ void setup()
 
     i2c_scan_bus();
     LED_RED_OFF();
+
+    Serial.println("Entering main loop");
 }
 
 

@@ -57,7 +57,7 @@ function chart_add_point(newData) {
 
 function refresh_reading()
 {
-    $.getJSON( '/api/diameter/read', function( data ) {
+    $.getJSON( '/api/v0/diameter/read', function( data ) {
 
         $('#reading-last').text(data['data']['diameter']);
         $('#reading-min').text(data['data']['min']);
@@ -71,7 +71,7 @@ function refresh_reading()
 
 function reset_stats()
 {
-    $.get( '/api/diameter/reset');
+    $.get( '/api/v0/diameter/reset');
 }
 
 function get_timestamp()

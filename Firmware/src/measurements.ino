@@ -116,6 +116,15 @@ void Measurements_Tick(void)
             LED_MEASUREMENT_ON();
         }
 
+        #ifdef PRINT_MEASUREMENT_OVER_SERIAL
+        if (Serial)
+        {
+            Serial.print(">");
+            Serial.print(gReadingLast);
+            Serial.print("mm\r\n");
+        }
+        #endif
+
         // Set next update timestamp
         nNextMeasurementTick = millis() + 200;
     }

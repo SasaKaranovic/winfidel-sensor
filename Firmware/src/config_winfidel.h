@@ -21,6 +21,8 @@
 #define CAL_POINT_FIRST                     { .adc = ADC_MIN, .mm = ADC_MIN_EQUALS_MM }
 #define CAL_POINT_LAST                      { .adc = ADC_MAX, .mm = ADC_MAX_EQUALS_MM }
 
+#define PRINT_MEASUREMENT_OVER_SERIAL               // Define if we want serial printout for every measurement
+
 #define ADC_MAX_SAMPLES                     64      // Maximum number of ADC samples we can take in one measurement cycle
 #define ADC_SAMPLES_PER_MEASUREMENT_CYCLE   16      // How many samples to take for each measurement cycle
 #define ADC_FINAL_ADC_VALUE_USING_MEAN              // Use mean instead of average ADC value
