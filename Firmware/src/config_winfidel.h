@@ -36,7 +36,8 @@
 #define LED_RED_PIN                         5       // RED LED pin number
 #define LED_GREEN_PIN                       4       // GREEN LED pin number
 #define LED_BLUE_PIN                        3       // BLUE LED pin number
-#define LED_MEASUREMENT_PIN                 LED_BLUE_PIN
+#define LED_MEASUREMENT_PIN                 LED_GREEN_PIN
+#define LED_SERIAL_PIN                      LED_BLUE_PIN
 
 #define LED_RED_ON()                        do { digitalWrite(LED_RED_PIN, LOW); } while(0)
 #define LED_RED_OFF()                       do { digitalWrite(LED_RED_PIN, HIGH); } while(0)
@@ -46,6 +47,8 @@
 #define LED_BLUE_OFF()                      do { digitalWrite(LED_BLUE_PIN, HIGH); } while(0)
 #define LED_MEASUREMENT_ON()                do { digitalWrite(LED_MEASUREMENT_PIN, LOW); } while(0)
 #define LED_MEASUREMENT_OFF()               do { digitalWrite(LED_MEASUREMENT_PIN, HIGH); } while(0)
+#define LED_SERIAL_ON()                     do { digitalWrite(LED_SERIAL_PIN, LOW); } while(0)
+#define LED_SERIAL_OFF()                    do { digitalWrite(LED_SERIAL_PIN, HIGH); } while(0)
 
 // String buffers
 #define SENSOR_STR_MAX_LEN                  256

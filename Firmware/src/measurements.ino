@@ -117,11 +117,20 @@ void Measurements_Tick(void)
         }
 
         #ifdef PRINT_MEASUREMENT_OVER_SERIAL
-        if (Serial)
+        if (bSerialPrintoutRequested && (Serial.availableForWrite()>9))
         {
             Serial.print(">");
             Serial.print(gReadingLast);
             Serial.print("mm\r\n");
+
+            if (bStatusLED)
+            {
+                LED_SERIAL_ON();
+            }
+            else
+            {
+                LED_SERIAL_OFF();
+            }
         }
         #endif
 

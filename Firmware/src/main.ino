@@ -14,6 +14,10 @@ const char mdnsName[] = MDNS_NAME;
 const char wifiName[] = WIFI_HOSTNAME;
 uint8_t dbgOTApercent = 100;
 bool bStatusLED = false;
+#ifdef PRINT_MEASUREMENT_OVER_SERIAL
+int SerialInByte = 0;
+bool bSerialPrintoutRequested = false;
+#endif
 
 void setup()
 {
@@ -124,6 +128,9 @@ void setup()
     LED_RED_OFF();
 
     Serial.println("Entering main loop");
+    LED_RED_OFF();
+    LED_GREEN_OFF();
+    LED_BLUE_OFF();
 }
 
 
@@ -131,4 +138,21 @@ void loop()
 {
     Measurements_Tick();
     ArduinoOTA.handle();
+
+#ifdef PRINT_MEASUREMENT_OVER_SERIAL
+    int available = Serial.available();
+    if(available > 0)
+    {
+        SerialInByte = Serial.read();
+        if(SerialInByte == 'S' || SerialInByte == 's')
+        {
+            bSerialPrintoutRequested = true;
+        }
+        else if(SerialInByte == 'E' || SerialInByte == 'e')
+        {
+            bSerialPrintoutRequested = false;
+            LED_SERIAL_OFF();
+        }
+    }
+#endif
 }
