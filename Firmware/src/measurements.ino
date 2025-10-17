@@ -116,7 +116,8 @@ void Measurements_Tick(void)
             LED_MEASUREMENT_ON();
         }
 
-        #ifdef PRINT_MEASUREMENT_OVER_SERIAL
+        // Measurement printing over USB-CDC
+        #ifdef CONFIG_PRINT_MEASUREMENTS_USB_CDC
         if (bSerialPrintoutRequested && (Serial.availableForWrite()>9))
         {
             Serial.print(">");
@@ -132,7 +133,15 @@ void Measurements_Tick(void)
                 LED_SERIAL_OFF();
             }
         }
-        #endif
+        #endif // CONFIG_PRINT_MEASUREMENTS_USB_CDC
+
+        // Measurement printing over Serial
+        #ifdef CONFIG_PRINT_MEASUREMENTS_UART_GPIO
+        Serial0.print(">");
+        Serial0.print(gReadingLast);
+        Serial0.print("mm\r\n");
+        #endif //CONFIG_PRINT_MEASUREMENTS_UART_GPIO
+
 
         // Set next update timestamp
         nNextMeasurementTick = millis() + 200;
