@@ -7,17 +7,21 @@
 #include "include/PersistSettings.h"
 #include "config_winfidel.h"
 
+bool bStatusLED = false;
+
+#if CONFIG_ENABLE_WIFI
 WiFiManager wifiManager;
 AsyncWebServer server(80);
 volatile int WiFi_status = WL_IDLE_STATUS;
 const char mdnsName[] = MDNS_NAME;
 const char wifiName[] = WIFI_HOSTNAME;
 uint8_t dbgOTApercent = 100;
-bool bStatusLED = false;
-#ifdef PRINT_MEASUREMENT_OVER_SERIAL
+#endif //CONFIG_ENABLE_WIFI
+
+#if CONFIG_PRINT_MEASUREMENTS_USB_CDC
 int SerialInByte = 0;
 bool bSerialPrintoutRequested = false;
-#endif
+#endif // CONFIG_PRINT_MEASUREMENTS_USB_CDC
 
 void setup()
 {
@@ -31,16 +35,21 @@ void setup()
     LED_RED_ON();
 
     // Configure Serial communication
-	Serial.begin(115200);
-    Serial.println("Wireless Inline Filament Estimator, Low-Cost - WInFiDEL");
-    WiFi.setHostname(wifiName);
+	Serial.begin(115200);   // USB-to-UART
+    Serial0.begin(115200);  // TX/RX GPIOS
 
-    // wifiManager.resetSettings(); // Wipe WiFi settings. Uncomment for WiFi manager testing
+    Serial.println("Wireless Inline Filament Estimator, Low-Cost - WInFiDEL");
+    Serial0.println("Wireless Inline Filament Estimator, Low-Cost - WInFiDEL");
+
+#if CONFIG_ENABLE_WIFI
+    WiFi.setHostname(wifiName);
+#endif // CONFIG_ENABLE_WIFI
 
     delay(500);
 
     LED_GREEN_ON();
 
+#if CONFIG_ENABLE_WIFI
     bool res;
     res = wifiManager.autoConnect("SK-WInFiDEL-Setup");
 
@@ -67,12 +76,14 @@ void setup()
 
     // Add service to MDNS-SD
     MDNS.addService("http", "tcp", 80);
+#endif // CONFIG_ENABLE_WIFI
 
     EEPROM.begin(sizeof(calibration_t));
     calibration_init();
 
     adc_init();
 
+#if CONFIG_ENABLE_WIFI
     Serial.print("Starting WebServer...");
 	setupWebServer();
 	server.begin();
@@ -120,6 +131,7 @@ void setup()
     });
     ArduinoOTA.begin();
     Serial.println("Arduino OTA is on");
+#endif // CONFIG_ENABLE_WIFI
 
     // Debug message to signal we are initialized and entering loop
 	Serial.println("Ready to go.");
@@ -137,9 +149,12 @@ void setup()
 void loop()
 {
     Measurements_Tick();
-    ArduinoOTA.handle();
 
-#ifdef PRINT_MEASUREMENT_OVER_SERIAL
+#if CONFIG_ENABLE_WIFI
+    ArduinoOTA.handle();
+#endif // CONFIG_ENABLE_WIFI
+
+#ifdef CONFIG_PRINT_MEASUREMENTS_USB_CDC
     int available = Serial.available();
     if(available > 0)
     {
@@ -154,5 +169,5 @@ void loop()
             LED_SERIAL_OFF();
         }
     }
-#endif
+#endif // CONFIG_PRINT_MEASUREMENTS_USB_CDC
 }

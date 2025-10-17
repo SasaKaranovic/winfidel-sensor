@@ -4,6 +4,17 @@
 #define MDNS_NAME       "winfidel"
 #define WIFI_HOSTNAME   "WInFiDEL by SK"
 
+#ifndef CONFIG_PRINT_MEASUREMENTS_USB_CDC
+#define CONFIG_PRINT_MEASUREMENTS_USB_CDC   1       // Set to `1` if we want serial (USB-to-Serial) printout for every measurement.
+#endif // CONFIG_PRINT_MEASUREMENTS_USB_CDC
+
+#ifndef CONFIG_PRINT_MEASUREMENTS_UART_GPIO
+#define CONFIG_PRINT_MEASUREMENTS_UART_GPIO 1       // Set to `1` if we want serial (TX GPIO) printout for every measurement.
+#endif // CONFIG_PRINT_MEASUREMENTS_UART_GPIO
+
+#ifndef CONFIG_ENABLE_WIFI
+#define CONFIG_ENABLE_WIFI                  1       // Set to `1` if we want to use WiFi (ie not requred for Serial only application)
+#endif
 
 #define CALIBRATION_POINT_SAMPLE_COUNT      32      // Number of ADC samples to take for new calibration point
 #define CALIBRATION_POINT_ACCURACY_POINT    50      // We expect all CALIBRATION_POINT_SAMPLE_COUNT samples to be
@@ -21,7 +32,6 @@
 #define CAL_POINT_FIRST                     { .adc = ADC_MIN, .mm = ADC_MIN_EQUALS_MM }
 #define CAL_POINT_LAST                      { .adc = ADC_MAX, .mm = ADC_MAX_EQUALS_MM }
 
-#define PRINT_MEASUREMENT_OVER_SERIAL               // Define if we want serial printout for every measurement
 
 #define ADC_MAX_SAMPLES                     64      // Maximum number of ADC samples we can take in one measurement cycle
 #define ADC_SAMPLES_PER_MEASUREMENT_CYCLE   16      // How many samples to take for each measurement cycle
@@ -85,6 +95,20 @@ typedef struct calibration
     uint32_t numPoints;
     uint8_t valid;
 } calibration_t;
+
+
+// Note during build that certain features have been disabled
+#if !CONFIG_ENABLE_WIFI
+    #pragma message "-- Note: WiFi is DISBLED in this build!"
+#endif
+
+#if !CONFIG_PRINT_MEASUREMENTS_USB_CDC
+    #pragma message "-- Note: Printing measurements over USB-CDC is DISABLED!"
+#endif
+
+#if !CONFIG_PRINT_MEASUREMENTS_UART_GPIO
+    #pragma message "-- Note: Printing measurements over SERIAL is DISABLED!"
+#endif
 
 
 #endif
