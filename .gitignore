@@ -92,3 +92,7 @@ scripts/__pycache__/
 *.bak
 *.dwl
 *.dwl2
+
+# Auto-generated files
+Firmware/src/binary_data.ino
+

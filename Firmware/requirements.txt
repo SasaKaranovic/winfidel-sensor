@@ -1,0 +1,4 @@
+minify-html>=0.18.1
+rjsmin>=1.2.5
+platformio==6.1.15
+esptool==5.1.0

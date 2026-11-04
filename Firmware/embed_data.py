@@ -212,8 +212,9 @@ class espembed:
             f.write("// Please do not manually modify this file\n")
             f.write("// since any changes to this file will be overwritten on next build.\n")
             f.write(f"// Generated on {datetime.today().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+            f.write("#ifndef CONFIG_DISABLE_WIFI\n\n\n\n")
             f.write(content)
-            f.write("\n// ---- End of auto generated file\n")
+            f.write("\n\n#endif\n// ---- End of auto generated file\n")
 
     def run(self):
         for handler, file_data in self.files.items():

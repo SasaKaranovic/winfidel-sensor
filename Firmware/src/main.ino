@@ -9,7 +9,7 @@
 
 bool bStatusLED = false;
 
-#if CONFIG_ENABLE_WIFI
+#ifndef CONFIG_DISABLE_WIFI
 WiFiManager wifiManager;
 AsyncWebServer server(80);
 volatile int WiFi_status = WL_IDLE_STATUS;
@@ -36,12 +36,25 @@ void setup()
 
     // Configure Serial communication
 	Serial.begin(115200);   // USB-to-UART
-    Serial0.begin(115200);  // TX/RX GPIOS
-
     Serial.println("Wireless Inline Filament Estimator, Low-Cost - WInFiDEL");
-    Serial0.println("Wireless Inline Filament Estimator, Low-Cost - WInFiDEL");
 
-#if CONFIG_ENABLE_WIFI
+    // Debug build flags
+    #ifdef CONFIG_PRINT_MEASUREMENTS_USB_CDC
+    Serial.println("CONFIG_PRINT_MEASUREMENTS_USB_CDC is set.");
+    #endif
+    #ifdef CONFIG_DISABLE_WIFI
+    Serial.println("CONFIG_DISABLE_WIFI is set.");
+    #endif
+    #ifdef CONFIG_PRINT_MEASUREMENTS_UART_GPIO
+    Serial.println("CONFIG_PRINT_MEASUREMENTS_UART_GPIO is set.");
+    #endif
+
+    #ifdef CONFIG_PRINT_MEASUREMENTS_UART_GPIO
+    Serial0.begin(115200);  // TX/RX GPIOS
+    Serial0.println("Wireless Inline Filament Estimator, Low-Cost - WInFiDEL");
+    #endif
+
+#ifndef CONFIG_DISABLE_WIFI
     WiFi.setHostname(wifiName);
 #endif // CONFIG_ENABLE_WIFI
 
@@ -49,7 +62,7 @@ void setup()
 
     LED_GREEN_ON();
 
-#if CONFIG_ENABLE_WIFI
+#ifndef CONFIG_DISABLE_WIFI
     bool res;
     res = wifiManager.autoConnect("SK-WInFiDEL-Setup");
 
@@ -83,7 +96,7 @@ void setup()
 
     adc_init();
 
-#if CONFIG_ENABLE_WIFI
+#ifndef CONFIG_DISABLE_WIFI
     Serial.print("Starting WebServer...");
 	setupWebServer();
 	server.begin();
@@ -150,7 +163,7 @@ void loop()
 {
     Measurements_Tick();
 
-#if CONFIG_ENABLE_WIFI
+#ifndef CONFIG_DISABLE_WIFI
     ArduinoOTA.handle();
 #endif // CONFIG_ENABLE_WIFI
 
@@ -166,7 +179,6 @@ void loop()
         else if(SerialInByte == 'E' || SerialInByte == 'e')
         {
             bSerialPrintoutRequested = false;
-            LED_SERIAL_OFF();
         }
     }
 #endif // CONFIG_PRINT_MEASUREMENTS_USB_CDC

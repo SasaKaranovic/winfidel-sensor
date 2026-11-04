@@ -5,6 +5,8 @@ Description: This file contains all the functions we use for receiving and respo
 
 #include "version.h"
 
+#ifndef CONFIG_DISABLE_WIFI
+
 char sensor_data[SENSOR_STR_MAX_LEN] = {0};
 
 // Helper function that allows us to replace template variable in .html file
@@ -217,3 +219,12 @@ void format_sensor_data(void)
     snprintf(sensor_data, SENSOR_STR_MAX_LEN, "{\"status\":\"ok\",\"data\":{\"diameter\":%.2f,\"min\":%.2f,\"max\":%.2f,\"avg\":%.2f,\"adc\":%d,\"count\":%d}}",
              get_last(), get_min(), get_max(), get_avg(), get_adc(), get_measurements_count());
 }
+
+#else
+
+char sensor_data[SENSOR_STR_MAX_LEN] = {0};
+String template_const_processor(const String& var) { return String(""); }
+void format_sensor_data(void) { return ; }
+void setupWebServer(void) { return; }
+
+#endif
