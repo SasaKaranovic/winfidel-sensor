@@ -1,0 +1,135 @@
+name: Firmware
+
+# What publishes, and to which channel:
+#   branch release*  -> stable      tag v1.22.4 / v2026.11.06 -> stable
+#   branch stable*   -> stable      GitHub release published   -> stable (pre-release -> preview)
+#   branch preview*  -> preview
+#   branch test*     -> preview
+# Manual runs ("Run workflow") follow the same rules for the branch or tag you pick.
+on:
+  push:
+    branches:
+      - "release**"
+      - "stable**"
+      - "preview**"
+      - "test**"
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+  release:
+    types: [published]
+  workflow_dispatch:
+
+# One run at a time per product. Don't cancel a run that is already uploading.
+concurrency:
+  group: firmware-publish-openfan-micro-v2
+  cancel-in-progress: false
+
+env:
+  CHIP: esp32c3
+
+jobs:
+  build:
+    runs-on: [self-hosted, docker-runner]
+    #runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        include:
+          - env: standard
+            variant: standard
+          - env: standard_w_gpio_uart
+            variant: standard_w_gpio_uart
+          - env: standard_no_wifi
+            variant: standard_no_wifi
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio/.cache
+          key: ${{ runner.os }}-pio-${{ hashFiles('Firmware/platformio.ini', 'Firmware/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pio-
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install Requirements
+        working-directory: ./Firmware
+        run: pip install -r requirements.txt
+
+      - name: Build
+        working-directory: ./Firmware
+        run: pio run -e ${{ matrix.env }}
+
+      - name: Show build output
+        run: find . -name 'merged-firmware.bin' -not -path './.git/*' -ls
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: fw-${{ matrix.variant }}
+          path: ./Firmware/.pio/build/${{ matrix.env }}/merged-firmware.bin
+          if-no-files-found: error
+
+  publish:
+    needs: build
+    if: >-
+      github.event_name == 'release' ||
+      startsWith(github.ref, 'refs/tags/v') ||
+      startsWith(github.ref, 'refs/heads/release') ||
+      startsWith(github.ref, 'refs/heads/stable') ||
+      startsWith(github.ref, 'refs/heads/preview') ||
+      startsWith(github.ref, 'refs/heads/test')
+    runs-on: ubuntu-24.04
+    steps:
+      # Download each variant by name into its own folder, so the path is always
+      # artifacts/fw-<variant>/merged-firmware.bin (one step per variant).
+      - uses: actions/download-artifact@v8
+        with:
+          name: fw-standard
+          path: artifacts/fw-standard
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: fw-standard_w_gpio_uart
+          path: artifacts/fw-standard_w_gpio_uart
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: fw-standard_no_wifi
+          path: artifacts/fw-standard_no_wifi
+
+      - name: Show downloaded files
+        run: find artifacts -type f -ls
+
+      - name: Pick the channel
+        id: channel
+        env:
+          EVENT: ${{ github.event_name }}
+          PRERELEASE: ${{ github.event.release.prerelease }}
+        run: |
+          case "$EVENT:$GITHUB_REF" in
+            release:*)                       channel=$([ "$PRERELEASE" = "true" ] && echo preview || echo stable) ;;
+            *:refs/tags/*)                   channel=stable ;;
+            *:refs/heads/release*)           channel=stable ;;
+            *:refs/heads/stable*)            channel=stable ;;
+            *:refs/heads/preview*)           channel=preview ;;
+            *:refs/heads/test*)              channel=preview ;;
+            *) echo "::error::No channel for $EVENT $GITHUB_REF"; exit 1 ;;
+          esac
+          echo "channel=$channel" >> "$GITHUB_OUTPUT"
+          echo "Publishing $GITHUB_REF ($EVENT) to channel: $channel"
+
+      - uses: SasaKaranovic/docs-esp-firmware-publish@v1
+        with:
+          product: openfan-micro
+          builds: |
+            standard=artifacts/fw-standard/merged-firmware.bin
+            standard_w_gpio_uart=artifacts/fw-standard_w_gpio_uart/merged-firmware.bin
+            standard_no_wifi=artifacts/fw-standard_no_wifi/merged-firmware.bin
+          channel: ${{ steps.channel.outputs.channel }}
+          host: ${{ secrets.FIRMWARE_DEPLOY_HOST }}
+          ssh-key: ${{ secrets.FIRMWARE_DEPLOY_KEY }}
+          known-hosts: ${{ secrets.FIRMWARE_KNOWN_HOSTS }}
