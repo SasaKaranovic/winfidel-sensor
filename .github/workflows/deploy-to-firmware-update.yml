@@ -126,9 +126,9 @@ jobs:
         with:
           product: winfidel
           builds: |
-            standard=artifacts/fw-standard/merged-firmware.bin
-            standard_w_gpio_uart=artifacts/fw-standard_w_gpio_uart/merged-firmware.bin
-            standard_no_wifi=artifacts/fw-standard_no_wifi/merged-firmware.bin
+            production=artifacts/fw-standard/merged-firmware.bin
+            production-with-gpio-uart=artifacts/fw-standard_w_gpio_uart/merged-firmware.bin
+            production-no-wifi=artifacts/fw-standard_no_wifi/merged-firmware.bin
           channel: ${{ steps.channel.outputs.channel }}
           host: ${{ secrets.FIRMWARE_DEPLOY_HOST }}
           ssh-key: ${{ secrets.FIRMWARE_DEPLOY_KEY }}
