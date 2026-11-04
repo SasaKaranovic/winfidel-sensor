@@ -21,7 +21,7 @@ on:
 
 # One run at a time per product. Don't cancel a run that is already uploading.
 concurrency:
-  group: firmware-publish-openfan-micro-v2
+  group: firmware-publish-winfidel
   cancel-in-progress: false
 
 env:
@@ -124,7 +124,7 @@ jobs:
 
       - uses: SasaKaranovic/docs-esp-firmware-publish@v1
         with:
-          product: openfan-micro
+          product: winfidel
           builds: |
             standard=artifacts/fw-standard/merged-firmware.bin
             standard_w_gpio_uart=artifacts/fw-standard_w_gpio_uart/merged-firmware.bin
